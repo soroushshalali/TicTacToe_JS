@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <div>
+            <section class="section_selector">
+                    <select name="selector" id="selector">
+                        <option value="1">1 player</option>
+                        <option value="2" selected="selected">2 player</option>
+                    </select>
+                    <br>
+                    <div>
+                        <label for="">Player 1</label>
+                        <input class="name_player1" type="text"><br>
+                        <label for="">Player 2</label>
+                        <input class="name_player2" type="text">
+                    </div>
+                    <a type="submit" class="start" id="start"><span></span>START</a>
+            </section>
+
+
+            <section class="main_sec">
+                <section class="show_result">
+                    <div>
+                        <h2 class="winner_name"></h2>
+                    </div>
+                    <div>
+                        <button class="again">Again</button>
+                        <button class="reset">Reset</button>
+                    </div>
+                </section>
+
+                <h2 class="show_player1"></h2>
+                <div class="board" id="flat">
+                    <div data-value=0 class="cell_0"></div>
+                    <div data-value=1 class="cell_1"></div>
+                    <div data-value=2 class="cell_2"></div>
+                    <div data-value=3 class="cell_3"></div>
+                    <div data-value=4 class="cell_4"></div>
+                    <div data-value=5 class="cell_5"></div>
+                    <div data-value=6 class="cell_6"></div>
+                    <div data-value=7 class="cell_7"></div>
+                    <div data-value=8 class="cell_8"></div>
+                </div>
+                <h2 class="show_player2"></h2>
+            </section>
+        </div>
+    </main>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
