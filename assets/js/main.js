@@ -3,6 +3,7 @@ $(document).ready(function () {
     let playerName1, playerName2;
     let flagQueue = true;
     let startFlag = false;
+    let CPsignCounter = 0;
 
     $('.board > div').on('click', function (e) {
         if (startFlag) {
@@ -21,16 +22,66 @@ $(document).ready(function () {
         }
     });
 
-    const options = [
+    let options = [
         [1, 4, 7],
         [3, 4, 5],
         [0, 1, 2],
-        [6, 7, 8],
-        [0, 3, 6],
+        [7, 6, 8],
+        [6, 3, 0],
         [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
+        [8, 4, 0],
+        [4, 2, 6]
     ];
+    options = options.sort(() => Math.random() - 0.5);
+
+
+    function checkLine() {
+        let checkCell = 0;
+
+        for (let j = 0; j <= 7; j++) {
+            for (let i = 0; i <= 2; i++) {
+                if (!$(`.cell_${options[j][i]}`).text() || $(`.cell_${options[j][i]}`).text() == 'X') {
+                    checkCell++; 
+                }
+            }
+            if (checkCell == 3) {
+                break;
+            }
+            checkCell=0;
+        }
+        if (checkCell != 3) {
+            return true;
+        }
+    }
+
+
+    $('.cp').click(cp);
+    function cp() {
+        console.log(options);
+        checkCell = 0;
+        let i;
+        for (i = 0; i <= 7; i++) {
+            for (let j = 0; j <= 2; j++) {
+                if (!$(`.cell_${options[i][j]}`).text() || $(`.cell_${options[i][j]}`).text() == 'X') {
+                    checkCell++;
+                    console.log('A');
+                }
+            }
+            if (checkCell == 3) {
+                console.log('break');
+                break;
+            } else {
+                console.log('not break')
+            }
+        }
+        console.log('CPsignCounter=' + CPsignCounter);
+        console.log('checkCell=' + checkCell);
+        console.log(i);
+        if (checkCell == 3) {
+            $(`.cell_${options[i][CPsignCounter]}`).text('X');
+            CPsignCounter++;
+        }
+    }
 
     const showResult = (signWinner) => {
         $('.show_result').show(1000);
@@ -76,8 +127,10 @@ $(document).ready(function () {
 
         if ($('#selector').val() == 2) {
             $('.name_player2').show();
+            $('label[for="t2"]').show();
         } else {
             $('.name_player2').hide();
+            $('label[for="t2"]').hide();
         }
 
     });
@@ -91,19 +144,20 @@ $(document).ready(function () {
             restGame();
         } else {
             if ($('#selector').val() == 1) {
-                player();
                 showName(1);
+                cp();
             } else {
-                players();
                 showName(2);
             }
             startFlag = true;
             $(".section_selector").find('input').attr("disabled", "true");
             $(".section_selector").find('select').attr("disabled", "true");
             $('.start').text('RESTART');
-            // return true;
         }
     }
+
+
+
 
     const showName = (e) => {
         playerName1 = ($('.name_player1').val()) ? $('.name_player1').val() : 'Player 1';
@@ -129,11 +183,6 @@ $(document).ready(function () {
         window.location.reload();
     }
 
-    const player = () => {
-    }
-
-    const players = () => {
-    }
 
 
     $('.start').on('mouseenter', (e) => {
